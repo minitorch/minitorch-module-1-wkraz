@@ -65,6 +65,7 @@ def test_simple(a: float, b: float) -> None:
     c = Scalar(a).relu() + Scalar(b).relu()
     assert_close(c.data, minitorch.operators.relu(a) + minitorch.operators.relu(b))
 
+
     # Add others if you would like...
 
 
