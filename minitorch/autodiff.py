@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Any, Iterable, List, Tuple
 
-from typing_extensions import Protocol
+from typing_extensions import Protocol, runtime_checkable
 
 # ## Task 1.1
 # Central Difference calculation
@@ -37,6 +37,7 @@ def central_difference(f: Any, *vals: Any, arg: int = 0, epsilon: float = 1e-6) 
 variable_count = 1
 
 
+@runtime_checkable
 class Variable(Protocol):
     def accumulate_derivative(self, x: Any) -> None:
         pass

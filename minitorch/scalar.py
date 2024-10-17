@@ -163,8 +163,20 @@ class Scalar:
         assert h.last_fn is not None
         assert h.ctx is not None
 
-        # TODO: Implement for Task 1.3.
-        raise NotImplementedError("Need to implement for Task 1.3")
+        fn = h.last_fn
+        inputs = h.inputs
+        
+        local_derivs = fn.backward(h.ctx, d_output)
+        
+        result = []
+        
+        # Pair each variable with its respective local derivative
+        for input_var, local_deriv in zip(inputs, local_derivs):
+            # only include a variable that requires a gradient
+            if input_var.history is not None: # if it has a history, it requires gradients (instead of .requires_grad)
+                result.append((input_var, local_deriv))
+        
+        return result
 
     def backward(self, d_output: Optional[float] = None) -> None:
         """
